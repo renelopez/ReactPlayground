@@ -1,4 +1,9 @@
-#stars-section{
+.starsSection{
   @include section-mixin;
-  float:right;
+  float:left;
+
+  .glyphicon{
+    margin-right: 0.9em;
+    font-size: 1.9em;
+  }
 }

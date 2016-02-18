@@ -7,5 +7,7 @@
     <orderEntry type="library" name="Node.js Core Modules" level="application" />
     <orderEntry type="library" name="Node.js Globals" level="application" />
     <orderEntry type="library" name="ReactPlayground node_modules" level="project" />
+    <orderEntry type="library" name="Node.js Core Modules" level="application" />
+    <orderEntry type="library" name="Node.js Globals" level="project" />
   </component>
 </module>

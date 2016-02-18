@@ -1,4 +1,4 @@
-#selected-section{
+.selectedSection{
   @include section-mixin;
   float: right;
 }

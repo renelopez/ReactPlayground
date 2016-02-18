@@ -12,7 +12,6 @@ let config = Object.assign({}, baseConfig, {
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
     'webpack/hot/only-dev-server',
-    'bootstrap-loader',
     './src/index'
   ],
   cache: true,
@@ -21,8 +20,11 @@ let config = Object.assign({}, baseConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false//,
-      //excludes: /.*\.less/
+      modulesDirectories: ['bower_components'],
+      manifestFiles:      'bower.json',
+      includes:           /.*/,
+      excludes: /.*\.less/,
+      searchResolveModulesDirectories: false
     }),
     new webpack.ProvidePlugin({
       $:      "jquery",

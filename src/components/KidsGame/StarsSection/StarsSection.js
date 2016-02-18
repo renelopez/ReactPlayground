@@ -6,8 +6,10 @@ class StarsSectionComponent extends React.Component{
 
   render(){
       return(
-        <div id="stars-section">
-          StarsSection
+        <div className="starsSection well">
+          <span className="glyphicon glyphicon-star"></span>
+          <span className="glyphicon glyphicon-star"></span>
+          <span className="glyphicon glyphicon-star"></span>
         </div>);
   }
 }

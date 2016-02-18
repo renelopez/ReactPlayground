@@ -47,10 +47,6 @@ function getDefaultModules() {
       {
         test: /\.(png|jpg|gif|woff|woff2|ttf|eot|svg)([\?]?.*)$/,
         loader: 'file-loader?name=[name].[ext]'
-      },
-      // Bootstrap 3
-      { test: /bootstrap-sass\/assets\/javascripts\//,
-        loader: 'imports?jQuery=jquery'
       }
     ]
   };

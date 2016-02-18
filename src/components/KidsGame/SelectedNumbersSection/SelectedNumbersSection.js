@@ -6,7 +6,7 @@ class SelectedNumbersSectionComponent extends React.Component{
 
   render(){
     return(
-           <div id="selected-section">
+           <div className="selectedSection well">
                 SelectedNumbersSection
            </div>);
   }

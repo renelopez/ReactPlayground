@@ -6,9 +6,15 @@ class AvailableNumbersSectionComponent extends React.Component{
 
   render(){
       return(
-        <div id="available-section" className="well">
-          AvailableNumbersSection
-          <button className="btn btn-success">Success</button>
+        <div className="availableSection well">
+          <span className="number">1</span>
+          <span className="number">2</span>
+          <span className="number">3</span>
+          <span className="number">4</span>
+          <span className="number">3</span>
+          <span className="number">3</span>
+          <span className="number">3</span>
+          <span className="number">3</span>
       </div>);
   }
 }
