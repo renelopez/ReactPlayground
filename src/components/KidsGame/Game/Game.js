@@ -35,7 +35,7 @@ class GameComponent extends React.Component {
     return (<div className="container">
       <StarsSection stars={this.state.stars}/>
       <ResetGame onReset={this.resetGame}/>
-      <SelectedNumbersSection />
+      <SelectedNumbersSection selectedNumbers={this.selectedNumbers} />
       <AvailableNumbersSection numberSize={this.props.numberSize} selectedNumbers={this.state.selectedNumbers} onChooseNumber={this.chooseNumber}/>
     </div>)
   }

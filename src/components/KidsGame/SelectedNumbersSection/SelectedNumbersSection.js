@@ -5,9 +5,13 @@ import s from './SelectedNumbersSection.scss'
 class SelectedNumbersSectionComponent extends React.Component{
 
   render(){
-    return(
-           <div className="selectedSection well">
-                SelectedNumbersSection
+    var numbersToRender=this.props.selectedNumbers.map(function(item,index){
+        return <SelectedNumber text={item} key={index}/>
+    });
+
+
+    return(<div className="selectedSection well">
+             {numbersToRender}
            </div>);
   }
 }
