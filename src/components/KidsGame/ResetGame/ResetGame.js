@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React,{ Component } from 'react';
 import s from './ResetGame.scss'
 
-class ResetGameComponent extends React.Component {
+class ResetGameComponent extends Component {
 
   static propTypes={
     onReset:React.PropTypes.func.isRequired
@@ -13,9 +13,8 @@ class ResetGameComponent extends React.Component {
   };
 
   render() {
-    return (<div className="middleSection">
+    return (
             <button className="btn btn-danger btn-raised" onClick={this.reset}>Reset Game</button>
-            </div>
           );
   }
 }

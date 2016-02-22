@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{ Component } from 'react';
 import s from './StarsSection.scss'
 
 
 import Star from '../Star';
 
 
-class StarsSectionComponent extends React.Component {
+class StarsSectionComponent extends Component {
 
   static propTypes = {
     stars: React.PropTypes.number.isRequired

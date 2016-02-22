@@ -1,16 +1,14 @@
-.number{
+.selectedNumber{
   margin-right: 0.9em;
   font-size: 1.9em;
   padding:.5em;
   border-radius: 1em;
+  margin-bottom: 0.9em;
+  float:left;
   cursor: pointer;
 }
 
 
-.selected-false{
+.selectedNumber-false{
   background-color: lightgrey;
-}
-
-.selected-true{
-  background-color: lightgreen;
 }

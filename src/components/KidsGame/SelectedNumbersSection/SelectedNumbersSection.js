@@ -1,12 +1,21 @@
 
-import React from 'react';
-import s from './SelectedNumbersSection.scss'
+import React,{ Component } from 'react';
+import s from './SelectedNumbersSection.scss';
 
-class SelectedNumbersSectionComponent extends React.Component{
+import SelectedNumber from '../SelectedNumber'
+
+class SelectedNumbersSectionComponent extends Component{
+
+  undoNumber=(number)=>{
+    this.props.onUndoNumber(number);
+  };
+
+
 
   render(){
+    var self=this;
     var numbersToRender=this.props.selectedNumbers.map(function(item,index){
-        return <SelectedNumber text={item} key={index}/>
+        return <SelectedNumber number={item} key={index} onUndoNumber={self.undoNumber}/>
     });
 
 
