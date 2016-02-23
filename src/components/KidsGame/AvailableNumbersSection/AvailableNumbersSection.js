@@ -28,7 +28,7 @@ class AvailableNumbersSectionComponent extends Component{
 
 
     for(var i= 1;i<=numberSize;i++){
-      
+
       statusClass='number selected-'+ (selectedNumbers.indexOf(i)>=0);
       numbersToRender.push(<Number statusClass={statusClass} onSelectNumber={this.selectNumber} number={i} key={i}/>)
     }
