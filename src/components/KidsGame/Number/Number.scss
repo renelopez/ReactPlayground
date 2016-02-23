@@ -1,16 +1,19 @@
-.number{
+.number {
   margin-right: 0.9em;
   font-size: 1.9em;
-  padding:.5em;
+  padding: .5em;
   border-radius: 1em;
   cursor: pointer;
-}
 
+  &.chosen {
+    background-color: #a7ffeb;
+  }
 
-.selected-false{
-  background-color: lightgrey;
-}
+  &.selected-false {
+    background-color: lightgrey;
+  }
 
-.selected-true{
-  background-color: lightgreen;
+  &.selected-true {
+    background-color: lightgreen;
+  }
 }

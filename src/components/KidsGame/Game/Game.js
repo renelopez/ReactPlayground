@@ -42,6 +42,11 @@ class GameComponent extends Component {
             }else{
               this.setState({actionState:2})
             }
+            break;
+      case 2:
+            
+        break;
+
     }
 
   };

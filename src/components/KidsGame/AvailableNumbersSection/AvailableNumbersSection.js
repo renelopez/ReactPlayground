@@ -15,6 +15,9 @@ class AvailableNumbersSectionComponent extends Component{
     this.props.onChooseNumber(data);
   };
 
+  chosenElement=()=>{
+    alert('You cannot select an already used number..Please select other one')
+  };
 
   render(){
 
@@ -28,7 +31,10 @@ class AvailableNumbersSectionComponent extends Component{
 
 
     for(var i= 1;i<=numberSize;i++){
-
+      if(usedNumbers.indexOf(i) > -1){
+        numbersToRender.push(<Number statusClass="number chosen" onSelectNumber={this.chosenElement} number={i} key={i}/>)
+        continue;
+      }
       statusClass='number selected-'+ (selectedNumbers.indexOf(i)>=0);
       numbersToRender.push(<Number statusClass={statusClass} onSelectNumber={this.selectNumber} number={i} key={i}/>)
     }
