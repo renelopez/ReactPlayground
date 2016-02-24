@@ -16,7 +16,7 @@ class GameComponent extends Component {
     actionState:0,
     stars: this.getRandomStarsNumber(),
     selectedNumbers:[],
-    usedNumbers:[4,7]
+    usedNumbers:[]
   };
 
   getRandomStarsNumber() {
@@ -24,7 +24,7 @@ class GameComponent extends Component {
   }
 
   resetGame = ()=> {
-    this.setState({stars: this.getRandomStarsNumber(),selectedNumbers:[]})
+    this.setState({stars: this.getRandomStarsNumber(),selectedNumbers:[],actionState:0})
   };
 
   chooseNumber = (number) =>{
@@ -43,9 +43,10 @@ class GameComponent extends Component {
               this.setState({actionState:2})
             }
             break;
-      case 2:
-            
-        break;
+      case 2:var updatedUsedNumbers=this.state.usedNumbers.concat(this.state.selectedNumbers);
+             this.setState({usedNumbers:updatedUsedNumbers});
+             this.resetGame();
+            break;
 
     }
 
