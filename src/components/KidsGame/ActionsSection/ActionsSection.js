@@ -28,7 +28,7 @@ class ActionSectionComponent extends Component{
       <div className="actionsSection">
         <ResetGame onReset={this.resetGame}/>
         <Redraw onRedraw={this.redraw} redraws={this.props.redraws} />
-        <AcceptAnswer actionState={this.props.actionState} onActionClick={this.onActionClick} />
+        <AcceptAnswer actionState={this.props.actionState} onActionClick={this.onActionClick} isDisabled={this.props.isDisabled} />
       </div>
     );
   }

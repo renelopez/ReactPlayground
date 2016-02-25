@@ -6,7 +6,8 @@ class RedrawComponent extends Component{
 
 
   static propTypes={
-
+    onRedraw:React.PropTypes.func.isRequired,
+    redraws:React.PropTypes.number.isRequired
   };
 
   raiseRedraw=()=>{
