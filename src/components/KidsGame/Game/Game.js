@@ -7,66 +7,78 @@ import AvailableNumbersSection from '../AvailableNumbersSection';
 
 class GameComponent extends Component {
 
-  static defaultProps={
-    numberSize:9
+  static defaultProps = {
+    numberSize: 9
   };
 
 
   state = {
-    actionState:0,
+    actionState: 0,
     stars: this.getRandomStarsNumber(),
-    selectedNumbers:[],
-    usedNumbers:[]
+    selectedNumbers: [],
+    usedNumbers: [],
+    redraws: 5
+  };
+
+  chooseNumber = (number) => {
+    if (this.state.selectedNumbers.indexOf(number) < 0) {
+      this.setState({selectedNumbers: this.state.selectedNumbers.concat(number)})
+    }
   };
 
   getRandomStarsNumber() {
     return Math.floor(Math.random() * 9) + 1;
   }
 
-  resetGame = ()=> {
-    this.setState({stars: this.getRandomStarsNumber(),selectedNumbers:[],actionState:0})
-  };
 
-  chooseNumber = (number) =>{
-      if(this.state.selectedNumbers.indexOf(number) < 0){
-        this.setState({selectedNumbers:this.state.selectedNumbers.concat(number)})
-      }
-  };
-
-  onActionClick=(newState)=>{
-    switch (newState){
+  onActionClick = (newState)=> {
+    switch (newState) {
       case 1:
-            var selectedNumbersSum=this.state.selectedNumbers.reduce((accum,item)=> accum + item,0);
-            if(selectedNumbersSum === this.state.stars){
-              this.setState({actionState:newState});
-            }else{
-              this.setState({actionState:2})
-            }
-            break;
-      case 2:var updatedUsedNumbers=this.state.usedNumbers.concat(this.state.selectedNumbers);
-             this.setState({usedNumbers:updatedUsedNumbers});
-             this.resetGame();
-            break;
-
+        var selectedNumbersSum = this.state.selectedNumbers.reduce((accum, item)=> accum + item, 0);
+        if (selectedNumbersSum === this.state.stars) {
+          this.setState({actionState: newState});
+        } else {
+          this.setState({actionState: 2})
+        }
+        break;
+      case 2:
+        var updatedUsedNumbers = this.state.usedNumbers.concat(this.state.selectedNumbers);
+        this.setState({usedNumbers: updatedUsedNumbers});
+        this.resetGame();
+        break;
     }
 
   };
 
-  undoNumber=(number)=>{
-   var selectedNumbers=this.state.selectedNumbers,
-       indexOfNumber=selectedNumbers.indexOf(number);
+  redraw = ()=> {
+    if(this.state.redraws > 1){
+      var newState=this.state.redraws-1;
+      this.setState({stars:this.getRandomStarsNumber(),redraws:newState});
+    }
+  };
 
-    selectedNumbers.splice(indexOfNumber,1);
-    this.setState({selectedNumbers:selectedNumbers,actionState:0});
+  resetGame = ()=> {
+    this.setState({stars: this.getRandomStarsNumber(), selectedNumbers: [], actionState: 0})
+  };
+
+  undoNumber = (number)=> {
+    var selectedNumbers = this.state.selectedNumbers,
+      indexOfNumber = selectedNumbers.indexOf(number);
+
+    selectedNumbers.splice(indexOfNumber, 1);
+    this.setState({selectedNumbers: selectedNumbers, actionState: 0});
   };
 
   render() {
     return (<div className="container">
       <StarsSection stars={this.state.stars}/>
-      <ActionsSection onReset={this.resetGame} actionState={this.state.actionState}
-                      onActionClick={this.onActionClick} />
+      <ActionsSection onReset={this.resetGame}
+                      actionState={this.state.actionState}
+                      onActionClick={this.onActionClick}
+                      onRedraw={this.redraw}
+                      redraws={this.state.redraws}/>
       <SelectedNumbersSection selectedNumbers={this.state.selectedNumbers}
-                              onUndoNumber={this.undoNumber} />
+                              onUndoNumber={this.undoNumber}/>
       <AvailableNumbersSection numberSize={this.props.numberSize}
                                selectedNumbers={this.state.selectedNumbers}
                                usedNumbers={this.state.usedNumbers}
