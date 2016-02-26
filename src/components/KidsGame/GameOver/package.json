@@ -1,0 +1,5 @@
+{
+  "name": "GameOver",
+  "version": "0.0.1",
+  "main":"./GameOver.js"
+}

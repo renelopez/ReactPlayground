@@ -6,7 +6,8 @@ class AcceptAnswerComponent extends Component{
 
 
   static propTypes={
-    actionState:React.PropTypes.number,
+    actionState:React.PropTypes.number.isRequired,
+    isDisabled:React.PropTypes.bool.isRequired,
     onActionClick:React.PropTypes.func.isRequired
   };
 
@@ -25,7 +26,7 @@ class AcceptAnswerComponent extends Component{
     }
 
     return(
-        <button className={classToRender} onClick={this.onActionClick} >{textToRender}</button>
+        <button className={classToRender} onClick={this.onActionClick} disabled={this.props.isDisabled} >{textToRender}</button>
     );
   }
 }
