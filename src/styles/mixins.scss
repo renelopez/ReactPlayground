@@ -1,0 +1,9 @@
+$section-width: 40%;
+$section-height: 300px;
+
+@mixin section-mixin {
+  margin: 0 auto;
+  width: $section-width;
+  height: $section-height;
+  float:left;
+}
