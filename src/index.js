@@ -1,4 +1,3 @@
-require('bootstrap-sass');
 require('bootstrap-material-design');
 
 import 'core-js/fn/object/assign';
