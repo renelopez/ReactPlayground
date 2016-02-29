@@ -1,4 +1,7 @@
-require('bootstrap-material-design');
+import 'bootstrap-material-design/dist/sassc/bootstrap-material-design.css';
+import 'bootstrap-material-design/dist/sassc/ripples.css';
+import 'bootstrap-material-design/dist/js/material.js';
+import 'bootstrap-material-design/dist/js/ripples.js';
 
 import 'core-js/fn/object/assign';
 import React from 'react';

@@ -4,22 +4,16 @@ let path = require('path');
 let webpack = require('webpack');
 let baseConfig = require('./base');
 let defaultSettings = require('./defaults');
-
+let pkg=require('../package.json');
 // Add needed plugins here
 //let BowerWebpackPlugin = require('bower-webpack-plugin');
+let HtmlWebpackPlugin=require('html-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
-  entry: [
-    'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
-    'webpack/hot/only-dev-server',
-    './src/index',
-    'bootstrap-loader',
-    './node_modules/bootstrap-material-design/dist/sassc/bootstrap-material-design.css',
-    './node_modules/bootstrap-material-design/dist/sassc/ripples.css',
-    './node_modules/bootstrap-material-design/dist/js/material.js',
-    './node_modules/bootstrap-material-design/dist/js/ripples.js'
-
-  ],
+  entry: {
+    app:path.join(__dirname, '../src/index'),
+    vendor:Object.keys(pkg.dependencies)
+  },
   cache: true,
   devtool: 'eval-source-map',
   plugins: [
@@ -33,8 +27,11 @@ let config = Object.assign({}, baseConfig, {
       searchResolveModulesDirectories: false
     }),*/
     new webpack.ProvidePlugin({
-      $:      "jquery",
-      jQuery: "jquery"
+      $:      'jquery',
+      jQuery: 'jquery'
+    }),
+    new HtmlWebpackPlugin({
+      filename:'src/index.html'
     })
   ],
   module: defaultSettings.getDefaultModules(),
