@@ -31,7 +31,7 @@ let config = Object.assign({}, baseConfig, {
       jQuery: 'jquery'
     }),
     new HtmlWebpackPlugin({
-      filename:'src/index.html'
+      filename:'../index.html'
     })
   ],
   module: defaultSettings.getDefaultModules(),
