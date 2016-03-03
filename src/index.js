@@ -1,3 +1,4 @@
+import 'bootstrap-loader';
 import 'bootstrap-material-design/dist/sassc/bootstrap-material-design.css';
 import 'bootstrap-material-design/dist/sassc/ripples.css';
 import 'bootstrap-material-design/dist/js/material.js';
