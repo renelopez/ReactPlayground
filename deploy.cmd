@@ -62,16 +62,19 @@ IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
   IF !ERRORLEVEL! NEQ 0 goto error
 
   IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
-    SET /p NODE_EXE<="%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
+	echo :: Segundo Paso
+    SET /p NODE_EXE="%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
     IF !ERRORLEVEL! NEQ 0 goto error
   )
   
   IF EXIST "%DEPLOYMENT_TEMP%\__npmVersion.tmp" (
-    SET /p NPM_JS_PATH<="%DEPLOYMENT_TEMP%\__npmVersion.tmp"
+	echo :: Tercer Paso
+    SET /p NPM_JS_PATH="%DEPLOYMENT_TEMP%\__npmVersion.tmp"
     IF !ERRORLEVEL! NEQ 0 goto error
   )
 
   IF NOT DEFINED NODE_EXE (
+	echo :: Cuarto Paso
     SET NODE_EXE=node
   )
 
