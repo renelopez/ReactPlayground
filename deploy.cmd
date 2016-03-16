@@ -75,7 +75,7 @@ IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
 
   SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
 ) ELSE (
-  SET NPM_CMD=npm
+  SET NPM_CMD=npm --registry "http://registry.npmjs.org/"
   SET NODE_EXE=node
 )
 
