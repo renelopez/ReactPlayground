@@ -56,7 +56,9 @@ goto Deployment
 
 IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
   :: The following are done only on Windows Azure Websites environment
+  echo :: Estoy ejecutando apenas
   call %KUDU_SELECT_NODE_VERSION_CMD% "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TARGET%" "%DEPLOYMENT_TEMP%"
+  echo :: Paso de aqui
   IF !ERRORLEVEL! NEQ 0 goto error
 
   IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
