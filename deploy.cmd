@@ -86,12 +86,13 @@ goto :EOF
 :: ----------
 
 :Deployment
-echo Handling node.js deployment.
+echo Handling node.js deployment AQUI ESTA MI LOG.
+echo 1. Select Node Version
 
 :: 1. Select node version
 call :SelectNodeVersion
 
-echo  "Este es el Deployment Target:"%DEPLOYMENT_TARGET%
+echo 2. Install NPM Packages
 :: 2. Install npm packages
 IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   pushd "%DEPLOYMENT_SOURCE%"
@@ -105,6 +106,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   popd
 )
 
+echo 3. Kudu Sync
 :: 3. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\dist" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
