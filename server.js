@@ -1,4 +1,5 @@
-/*eslint no-console:0 */
+/*
+/!*eslint no-console:0 *!/
 'use strict';
 require('core-js/fn/object/assign');
 const webpack = require('webpack');
@@ -15,3 +16,12 @@ new WebpackDevServer(webpack(config), config.devServer)
   console.log('Opening your system browser...');
   open('http://localhost:' + config.port + '/webpack-dev-server/');
 });
+*/
+
+
+var express = require('express');
+var app = express();
+
+app.use(express.static(__dirname + '/dist'));
+
+app.listen(80);
