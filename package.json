@@ -19,6 +19,10 @@
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false"
   },
+  "engines": {
+    "node": "4.4.0",
+    "npm": "2.14.20"
+  },
   "repository": "",
   "keywords": [],
   "author": "Your name here",
