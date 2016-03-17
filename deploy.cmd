@@ -47,8 +47,9 @@ IF NOT DEFINED KUDU_SYNC_CMD (
   :: Locally just running "kuduSync" would also work
   SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
 )
-
- :: Utility Functions
+goto Deployment
+ 
+:: Utility Functions
 :: -----------------
 
 :SelectNodeVersion
@@ -82,6 +83,7 @@ goto :EOF
 :: Deployment
 :: ----------
 
+:Deployment
 echo Handling Basic Web Site deployment.
 call :SelectNodeVersion
 
