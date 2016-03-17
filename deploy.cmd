@@ -80,6 +80,7 @@ IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
 
   SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
 ) ELSE (
+echo :: Quinto Paso
   SET NPM_CMD=npm
   SET NODE_EXE=node
 )
