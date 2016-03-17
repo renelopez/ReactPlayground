@@ -23,7 +23,7 @@ setlocal enabledelayedexpansion
 SET ARTIFACTS=%~dp0%..\artifacts
 
 IF NOT DEFINED DEPLOYMENT_SOURCE (
-  SET DEPLOYMENT_SOURCE=%~dp0%
+  SET DEPLOYMENT_SOURCE=%~dp0%\site\repository
 )
 
 IF NOT DEFINED DEPLOYMENT_TARGET (
@@ -91,11 +91,11 @@ call :SelectNodeVersion
 
 echo :: 1. Install npm packages
 echo %DEPLOYMENT_SOURCE%\package.json
-IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\package.json" (
-  pushd "%DEPLOYMENT_SOURCE%\site\repository"
+IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
+  pushd "%DEPLOYMENT_SOURCE%"
   call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
-  IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\webpack.config.js" (
+  IF EXIST "%DEPLOYMENT_SOURCE%\webpack.config.js" (
     call :ExecuteCmd !NPM_CMD! run dist
     IF !ERRORLEVEL! NEQ 0 goto error
   )
