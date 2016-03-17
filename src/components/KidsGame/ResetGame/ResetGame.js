@@ -14,7 +14,7 @@ class ResetGameComponent extends Component {
 
   render() {
     return (
-            <button className="btn btn-danger btn-raised" onClick={this.reset}>Reset Game</button>
+            <button className="btn btn-warning btn-raised" onClick={this.reset}>Reset Game</button>
           );
   }
 }
