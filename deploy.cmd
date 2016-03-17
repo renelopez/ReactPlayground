@@ -23,7 +23,7 @@ setlocal enabledelayedexpansion
 SET ARTIFACTS=%~dp0%..\artifacts
 
 IF NOT DEFINED DEPLOYMENT_SOURCE (
-  SET DEPLOYMENT_SOURCE=%~dp0%.
+  SET DEPLOYMENT_SOURCE=%~dp0%
 )
 
 IF NOT DEFINED DEPLOYMENT_TARGET (
@@ -56,7 +56,6 @@ goto Deployment
 
 IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
   :: The following are done only on Windows Azure Websites environment
-  
   IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
   echo Primer
     SET /p NODE_EXE=<"%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
@@ -91,11 +90,12 @@ echo Handling Basic Web Site deployment.
 call :SelectNodeVersion
 
 echo :: 1. Install npm packages
-IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
-  pushd "%DEPLOYMENT_SOURCE%"
+echo %DEPLOYMENT_SOURCE%\package.json
+IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\package.json" (
+  pushd "%DEPLOYMENT_SOURCE%\site\repository"
   call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
-  IF EXIST "%DEPLOYMENT_SOURCE%\webpack.config.js" (
+  IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\webpack.config.js" (
     call :ExecuteCmd !NPM_CMD! run dist
     IF !ERRORLEVEL! NEQ 0 goto error
   )
@@ -104,7 +104,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
 
 echo :: 3 KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\dist" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\site\repository\dist" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
