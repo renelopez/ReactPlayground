@@ -47,40 +47,31 @@ IF NOT DEFINED KUDU_SYNC_CMD (
   :: Locally just running "kuduSync" would also work
   SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
 )
-goto Deployment
 
-:: Utility Functions
+ :: Utility Functions
 :: -----------------
 
 :SelectNodeVersion
 
 IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
   :: The following are done only on Windows Azure Websites environment
-  echo :: Estoy ejecutando apenas
-  call %KUDU_SELECT_NODE_VERSION_CMD% "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TARGET%" "%DEPLOYMENT_TEMP%"
-  echo :: Paso de aqui
-  IF !ERRORLEVEL! NEQ 0 goto error
-
+  
   IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
-	echo :: Segundo Paso
     SET /p NODE_EXE="%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
     IF !ERRORLEVEL! NEQ 0 goto error
   )
   
   IF EXIST "%DEPLOYMENT_TEMP%\__npmVersion.tmp" (
-	echo :: Tercer Paso
     SET /p NPM_JS_PATH="%DEPLOYMENT_TEMP%\__npmVersion.tmp"
     IF !ERRORLEVEL! NEQ 0 goto error
   )
 
   IF NOT DEFINED NODE_EXE (
-	echo :: Cuarto Paso
     SET NODE_EXE=node
   )
 
   SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
 ) ELSE (
-echo :: Quinto Paso
   SET NPM_CMD=npm
   SET NODE_EXE=node
 )
@@ -91,17 +82,14 @@ goto :EOF
 :: Deployment
 :: ----------
 
-:Deployment
-echo Handling node.js deployment AQUI ESTA MI LOG.
-echo :: 1. Select node version
-call :SelectNodeVersion
+echo Handling Basic Web Site deployment.
 
-echo :: 2. Install npm packages
+echo :: 1. Install npm packages
 IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   pushd "%DEPLOYMENT_SOURCE%"
-  call :ExecuteCmd !NPM_CMD! install --production
+  call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
-  echo Execute Webpack
+echo :: 2  Execute Webpack
   IF EXIST "%DEPLOYMENT_SOURCE%\webpack.config.js" (
     call :ExecuteCmd !NPM_CMD! run dist
     IF !ERRORLEVEL! NEQ 0 goto error
@@ -109,8 +97,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   popd
 )
 
-echo 3. Kudu Sync
-:: 3. KuduSync
+echo :: 3 KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\dist" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
